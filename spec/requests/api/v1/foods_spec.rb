@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe "Foods API" do
   it "sends a list of foods" do
-    customer_list = create_list(:customer, 3)
+    food_list = create_list(:food, 5)
 
-    get '/api/v1/customers'
+    get '/api/v1/foods'
 
     expect(response).to be_success
 
-    customers = JSON.parse(response.body)
+    foods = JSON.parse(response.body)
 
-    expect(customers.count).to eq(customer_list.count)
+    expect(foods.count).to eq(food_list.count)
   end
 end
