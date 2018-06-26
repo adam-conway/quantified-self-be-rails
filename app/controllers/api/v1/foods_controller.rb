@@ -1,5 +1,5 @@
 class Api::V1::FoodsController < ApplicationController
-  protect_from_forgery except: :create
+  # protect_from_forgery except: :create
 
   def index
     render json: Food.all
