@@ -12,13 +12,13 @@ describe "Foods API" do
 
   it "creates a new of food" do
     params = {food: {:name => "Test", :calories => 1500}}
-    post "/api/v1/foods", params: params, headers: headers
+    post "/api/v1/foods", params: params
     expect(response.successful?)
 
     expect(Food.count).to eq(1)
 
     params = {food: {:name => "Again", :calories => 234}}
-    post "/api/v1/foods", params: params, headers: headers
+    post "/api/v1/foods", params: params
     expect(response.successful?)
 
     expect(Food.count).to eq(2)
