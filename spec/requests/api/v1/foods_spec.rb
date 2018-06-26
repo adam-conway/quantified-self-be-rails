@@ -14,6 +14,13 @@ describe "Foods API" do
     params = {food: {:name => "Test", :calories => 1500}}
     post "/api/v1/foods", params: params, headers: headers
     expect(response.successful?)
-    foods = JSON.parse(response.body)
+
+    expect(Food.count).to eq(1)
+
+    params = {food: {:name => "Again", :calories => 234}}
+    post "/api/v1/foods", params: params, headers: headers
+    expect(response.successful?)
+
+    expect(Food.count).to eq(2)
   end
 end
