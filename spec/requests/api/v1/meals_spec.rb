@@ -47,6 +47,6 @@ describe "Foods API" do
     expect(response.successful?)
     expect(response.status).to eq(201)
 
-    expect(brekky.meals.count).to eq(1)
+    expect(brekky.foods.count).to eq(1)
   end
 end
