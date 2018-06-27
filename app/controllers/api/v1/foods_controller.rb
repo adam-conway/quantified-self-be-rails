@@ -33,8 +33,12 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def destroy
-    food = Food.find(params[:id])
-    food.destroy and return 204
+    food = Food.find_by_id(params[:id])
+    if food.nil?
+      render json: { message: "Sry plz try again"}, status: 404
+    else
+      food.destroy and return 204
+    end
   end
 
   private
