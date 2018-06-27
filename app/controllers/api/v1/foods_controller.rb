@@ -20,6 +20,11 @@ class Api::V1::FoodsController < ApplicationController
     food.update(food_params)
   end
 
+  def destroy
+    food = Food.find(params[:id])
+    food.destroy and return 204
+  end
+
   private
     def food_params
       params.require(:food).permit(:name, :calories)
