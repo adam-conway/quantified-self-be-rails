@@ -46,7 +46,23 @@ describe "Foods API" do
     post "/api/v1/meals/#{brekky.id}/foods/#{food.id}"
     expect(response.successful?)
     expect(response.status).to eq(201)
+    message = JSON.parse(response.body)
 
     expect(brekky.foods.count).to eq(1)
+    expect(message["message"]).to eq("Successfully added #{food.name} to #{brekky.name}")
+  end
+
+  it "deletes a meal foods" do
+    brekky = Meal.create(name: "Breakfast")
+    food = create(:food)
+    brekky.meal_foods.create(food_id: food.id)
+    expect(brekky.foods.count).to eq(1)
+
+    delete "/api/v1/meals/#{brekky.id}/foods/#{food.id}"
+    expect(response.successful?)
+    message = JSON.parse(response.body)
+
+    expect(brekky.foods.count).to eq(0)
+    expect(message["message"]).to eq("Successfully removed #{food.name} to #{brekky.name}")
   end
 end
