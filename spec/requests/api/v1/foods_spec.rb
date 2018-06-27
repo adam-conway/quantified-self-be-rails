@@ -91,4 +91,13 @@ describe "Foods API" do
 
     expect(Food.count).to eq(0)
   end
+
+  it "tries to delete a food that doesn't exist" do
+    delete "/api/v1/foods/1"
+
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+
+    expect(Food.count).to eq(0)
+  end
 end
