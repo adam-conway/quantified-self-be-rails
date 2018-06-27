@@ -46,4 +46,16 @@ describe "Foods API" do
     expect(updated.id).to eq(food.id)
     expect(updated.name).to_not eq(food.name)
   end
+
+  it "deletes a food from DB and returns 204" do
+    food = create(:food)
+    expect(Food.count).to eq(1)
+
+    delete "/api/v1/foods/#{food.id}"
+
+    expect(response.successful?)
+    expect(response.status).to eq(204)
+
+    expect(Food.count).to eq(0)
+  end
 end
