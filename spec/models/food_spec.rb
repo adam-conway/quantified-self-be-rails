@@ -6,6 +6,8 @@ RSpec.describe Food, type: :model do
     it { should validate_presence_of(:calories) }
   end
 
-  # describe 'relationships' do
-  # end
+  describe 'relationships' do
+    it { should have_many(:meals) }
+    it { should have_many(:meal_foods) }
+  end
 end
