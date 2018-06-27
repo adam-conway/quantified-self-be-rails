@@ -6,8 +6,12 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def show
-    food = Food.find(params[:id])
-    render json: food
+    food = Food.find_by_id(params[:id])
+    if food.nil?
+      render json: { message: "Couldn't find that food, sry"}, status: 404
+    else
+      render json: food
+    end
   end
 
   def create

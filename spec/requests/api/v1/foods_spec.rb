@@ -20,6 +20,15 @@ describe "Foods API" do
     expect(food.id).to eq(api_food["id"])
   end
 
+  it "sends a 404 if food not found" do
+    get "/api/v1/foods/1"
+
+    expect(response.successful?)
+    api_food = JSON.parse(response.body)
+
+    expect(response.status).to eq(404)
+  end
+
   it "creates a new of food" do
     params = {food: {:name => "Test", :calories => 1500}}
     post "/api/v1/foods", params: params
