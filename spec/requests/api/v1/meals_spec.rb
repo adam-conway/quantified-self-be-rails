@@ -24,4 +24,18 @@ describe "Foods API" do
     expect(meals[2]["foods"].count).to eq(4)
     expect(meals[3]["foods"].count).to eq(4)
   end
+
+  it "sends a single meal's foods" do
+    brekky = Meal.create(name: "Breakfast")
+
+    4.times do
+      brekky.meal_foods.create(food_id: create(:food).id)
+    end
+
+    get "/api/v1/meals/#{brekky.id}"
+    expect(response.successful?)
+    meals = JSON.parse(response.body)
+
+    expect(meals.count).to eq(4)
+  end
 end
