@@ -36,6 +36,6 @@ describe "Foods API" do
     expect(response.successful?)
     meals = JSON.parse(response.body)
 
-    expect(meals.count).to eq(4)
+    expect(meals["foods"].count).to eq(4)
   end
 end
