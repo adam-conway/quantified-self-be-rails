@@ -58,6 +58,16 @@ describe "Foods API" do
     expect(message["message"]).to eq("Successfully added #{food.name} to #{brekky.name}")
   end
 
+  it "fails to posts a new meal foods" do
+    brekky = Meal.create(name: "Breakfast")
+
+    post "/api/v1/meals/#{brekky.id}/foods/1"
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+
+    expect(brekky.foods.count).to eq(0)
+  end
+
   it "deletes a meal foods" do
     brekky = Meal.create(name: "Breakfast")
     food = create(:food)
