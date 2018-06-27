@@ -15,13 +15,21 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def create
-    food = Food.create(food_params)
-    render json: food
+    food = Food.new(food_params)
+    if food.save
+      render json: food
+    else
+      render json: { message: "Sry plz try again"}, status: 400
+    end
   end
 
   def update
-    food = Food.find(params[:id])
-    food.update(food_params)
+    food = Food.find_by_id(params[:id])
+    if food.nil?
+      render json: { message: "Sry plz try again"}, status: 400
+    else
+      food.update(food_params)
+    end
   end
 
   def destroy

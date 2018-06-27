@@ -29,7 +29,7 @@ describe "Foods API" do
     expect(response.status).to eq(404)
   end
 
-  it "creates a new of food" do
+  it "creates a new food" do
     params = {food: {:name => "Test", :calories => 1500}}
     post "/api/v1/foods", params: params
     expect(response.successful?)
@@ -43,6 +43,15 @@ describe "Foods API" do
     expect(Food.count).to eq(2)
   end
 
+  it "unsuccessfully tries to create a new food" do
+    params = {food: {:calories => 1500}}
+    post "/api/v1/foods", params: params
+    expect(response.successful?)
+    expect(response.status).to eq(400)
+
+    expect(Food.count).to eq(0)
+  end
+
   it "patching a food" do
     food = create(:food)
     params = { "food": { "name": "Mint", "calories": "14"} }
@@ -54,6 +63,21 @@ describe "Foods API" do
 
     expect(updated.id).to eq(food.id)
     expect(updated.name).to_not eq(food.name)
+  end
+
+  it "unsuccessfully updates a food" do
+    food = create(:food)
+    params = { "food": {"a": "a"} }
+    patch "/api/v1/foods/#{food.id - 1}", params: params
+
+    expect(response.successful?)
+    expect(response.status).to eq(400)
+
+    updated = Food.last
+
+    expect(updated.id).to eq(food.id)
+    expect(updated.name).to eq(food.name)
+    expect(updated.calories).to_not eq(14)
   end
 
   it "deletes a food from DB and returns 204" do
