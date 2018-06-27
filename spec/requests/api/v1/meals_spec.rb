@@ -81,4 +81,17 @@ describe "Foods API" do
     expect(brekky.foods.count).to eq(0)
     expect(message["message"]).to eq("Successfully removed #{food.name} to #{brekky.name}")
   end
+
+  it "fails to delete a meal foods" do
+    brekky = Meal.create(name: "Breakfast")
+    food = create(:food)
+    brekky.meal_foods.create(food_id: food.id)
+    expect(brekky.foods.count).to eq(1)
+
+    delete "/api/v1/meals/#{brekky.id}/foods/#{food.id - 1}"
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+
+    expect(brekky.foods.count).to eq(1)
+  end
 end
