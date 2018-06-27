@@ -15,6 +15,11 @@ class Api::V1::FoodsController < ApplicationController
     render json: food
   end
 
+  def update
+    food = Food.find(params[:id])
+    food.update(food_params)
+  end
+
   private
     def food_params
       params.require(:food).permit(:name, :calories)

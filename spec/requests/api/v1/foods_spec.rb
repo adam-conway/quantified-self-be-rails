@@ -33,4 +33,17 @@ describe "Foods API" do
 
     expect(Food.count).to eq(2)
   end
+
+  it "patching a food" do
+    food = create(:food)
+    params = { "food": { "name": "Mint", "calories": "14"} }
+    patch "/api/v1/foods/#{food.id}", params: params
+
+    expect(response.successful?)
+
+    updated = Food.last
+
+    expect(updated.id).to eq(food.id)
+    expect(updated.name).to_not eq(food.name)
+  end
 end
