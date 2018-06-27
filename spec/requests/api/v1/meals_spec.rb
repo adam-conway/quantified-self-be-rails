@@ -39,6 +39,12 @@ describe "Foods API" do
     expect(meals["foods"].count).to eq(4)
   end
 
+  it "fails to send a single meal's foods" do
+    get "/api/v1/meals/1"
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+  end
+
   it "posts a new meal foods" do
     brekky = Meal.create(name: "Breakfast")
     food = create(:food)
@@ -50,6 +56,16 @@ describe "Foods API" do
 
     expect(brekky.foods.count).to eq(1)
     expect(message["message"]).to eq("Successfully added #{food.name} to #{brekky.name}")
+  end
+
+  it "fails to posts a new meal foods" do
+    brekky = Meal.create(name: "Breakfast")
+
+    post "/api/v1/meals/#{brekky.id}/foods/1"
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+
+    expect(brekky.foods.count).to eq(0)
   end
 
   it "deletes a meal foods" do
@@ -64,5 +80,18 @@ describe "Foods API" do
 
     expect(brekky.foods.count).to eq(0)
     expect(message["message"]).to eq("Successfully removed #{food.name} to #{brekky.name}")
+  end
+
+  it "fails to delete a meal foods" do
+    brekky = Meal.create(name: "Breakfast")
+    food = create(:food)
+    brekky.meal_foods.create(food_id: food.id)
+    expect(brekky.foods.count).to eq(1)
+
+    delete "/api/v1/meals/#{brekky.id}/foods/#{food.id - 1}"
+    expect(response.successful?)
+    expect(response.status).to eq(404)
+
+    expect(brekky.foods.count).to eq(1)
   end
 end
