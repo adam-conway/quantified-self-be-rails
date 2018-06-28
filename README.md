@@ -1,8 +1,8 @@
 # README
 
-This application is a back-end API that serves up data for a JavaScript front end, found [here](https://github.com/turingschool/qs-frontend-starter)
+This application is a back-end API that serves up data for a JavaScript front end, found [here](https://github.com/turingschool/qs-frontend-starter).
 
-This API has been deployed to both heroku [here](https://salty-reef-31480.herokuapp.com/api/v1/meals) and AWS [here](http://quantified-self-be-rails-dev2.us-west-2.elasticbeanstalk.com/api/v1/meals). The links for the application accessing each of those can be found below:
+This API has been deployed to both heroku [here](https://salty-reef-31480.herokuapp.com) and AWS [here](http://quantified-self-be-rails-dev2.us-west-2.elasticbeanstalk.com). The links for the application accessing each of those can be found below:
 
 [Heroku](http://elderly-order.surge.sh/)<br>
 [AWS](http://adjoining-transport.surge.sh/)
