@@ -1,24 +1,58 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is a back-end API that serves up data for a JavaScript front end, found [here](https://github.com/turingschool/qs-frontend-starter)
 
-Things you may want to cover:
+This API has been deployed to both heroku and AWS. The links for the application accessing each of those can be found below:
 
-* Ruby version
+[Heroku](http://elderly-order.surge.sh/)
+[AWS](http://adjoining-transport.surge.sh/)
 
-* System dependencies
+This API has the following end-points:
 
-* Configuration
+<h1>Foods</h1>
+```
+GET /api/v1/foods
+```
+Returns all foods
 
-* Database creation
+```
+GET /api/v1/foods/:id
+```
+Returns a single food
 
-* Database initialization
+```
+POST /api/v1/foods
+```
+Creates a new food
 
-* How to run the test suite
+```
+DELETE /api/v1/foods/:id
+```
+Deletes a food
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+PATCH /api/v1/foods/:id
+```
+Updates a food
 
-* Deployment instructions
 
-* ...
+<h1>Meal Endpoints</h1>
+```
+GET /api/v1/meals
+```
+Returns all meals (and foods)
+
+```
+GET /api/v1/meals/:meal_id/foods
+```
+Returns all foods for a single meal
+
+```
+POST /api/v1/meals/:meal_id/foods/:id
+```
+Adds a food to a meal
+
+```
+DELETE /api/v1/meals/:meal_id/foods/:id
+```
+Removes a food from a meal
