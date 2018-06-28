@@ -9,31 +9,31 @@ This API has been deployed to both heroku [here](https://salty-reef-31480.heroku
 
 This API has the following end-points:
 
-<h1>Foods</h1>
-`GET /api/v1/foods`
+## Foods
+`GET /api/v1/foods`<br>
 Returns all foods
 
-`GET /api/v1/foods/:id`
+`GET /api/v1/foods/:id`<br>
 Returns a single food
 
-`POST /api/v1/foods`
+`POST /api/v1/foods`<br>
 Creates a new food
 
-`DELETE /api/v1/foods/:id`
+`DELETE /api/v1/foods/:id`<br>
 Deletes a food
 
-`PATCH /api/v1/foods/:id`
+`PATCH /api/v1/foods/:id`<br>
 Updates a food
 
-<h1>Meal Endpoints</h1>
-`GET /api/v1/meals`
+## Meal Endpoints
+`GET /api/v1/meals`<br>
 Returns all meals (and foods)
 
-`GET /api/v1/meals/:meal_id/foods`
+`GET /api/v1/meals/:meal_id/foods`<br>
 Returns all foods for a single meal
 
-`POST /api/v1/meals/:meal_id/foods/:id`
+`POST /api/v1/meals/:meal_id/foods/:id`<br>
 Adds a food to a meal
 
-`DELETE /api/v1/meals/:meal_id/foods/:id`
+`DELETE /api/v1/meals/:meal_id/foods/:id`<br>
 Removes a food from a meal
